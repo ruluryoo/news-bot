@@ -1,0 +1,23 @@
+name: Daily News Bot
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 한국 시간 오전 9시
+  workflow_dispatch: # 수동 실행 버튼 생성
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run script
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          SLACK_WEB_URL: ${{ secrets.SLACK_WEB_URL }}
+        run: python news_feed.py
