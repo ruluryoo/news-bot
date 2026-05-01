@@ -2,7 +2,7 @@ name: Daily News Bot
 
 on:
   schedule:
-    - cron: '45 0 * * *' # 한국 시간 오전 9시
+    - cron: '3 0 * * *' # 한국 시간 오전 9시
   workflow_dispatch: # 수동 실행 버튼 생성
 
 jobs:
